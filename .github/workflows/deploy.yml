@@ -1,0 +1,29 @@
+name: Deploy React App to cPanel
+
+on:
+  push:
+    branches:
+      - main  # Jab bhi main branch pe push hoga, deploy karega
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build React App
+        run: npm run build
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: your-cpanel-server.com
+          username: your-cpanel-username
+          password: ${{ secrets.CPANEL_PASSWORD }}
+          local-dir: build/
+          server-dir: /public_html/your-react-app/
