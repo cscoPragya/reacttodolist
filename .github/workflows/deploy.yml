@@ -16,8 +16,8 @@ jobs:
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: 84.247.135.176
-          username: hypweb
+          server: ${{secrets.CPANEL_HOST}}
+          username: ${{secrets.CPANEL.USERNAME}}
           password: ${{ secrets.CPANEL_PASSWORD }}
           local-dir: dist/
           server-dir: /public_html/react_app/
